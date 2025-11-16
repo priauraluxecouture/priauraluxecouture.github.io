@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toutes les Créations - Priaura Luxe Couture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables de couleurs */
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F4E4A6;
+            --gold-dark: #B8860B;
+            --black: #000000;
+            --black-light: #333333;
+            --white: #FFFFFF;
+            --gray: #F5F5F5;
+        }
+
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--black-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header et Navigation */
+        header {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--gold);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            padding: 150px 0 80px;
+            text-align: center;
+            color: var(--white);
+            margin-top: 60px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Section Créations */
+        .all-creations {
+            padding: 80px 0;
+            background-color: var(--gray);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--black);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--gold);
+        }
+
+        /* Filtres */
+        .filters {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: none;
+            border: 2px solid var(--black-light);
+            color: var(--black-light);
+            padding: 8px 20px;
+            margin: 5px 10px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--gold);
+            border-color: var(--gold);
+            color: var(--black);
+        }
+
+        /* Grille de créations */
+        .creations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            min-height: 600px;
+        }
+
+        .creation-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .creation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .creation-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .creation-card:hover .creation-img {
+            transform: scale(1.05);
+        }
+
+        .creation-info {
+            padding: 20px;
+        }
+
+        .creation-category {
+            color: var(--gold);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .creation-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--black);
+        }
+
+        .creation-description {
+            color: var(--black-light);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .view-btn {
+            background: none;
+            border: none;
+            color: var(--gold);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .view-btn i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        .view-btn:hover {
+            color: var(--gold-dark);
+        }
+
+        .view-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 5px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .lightbox-close:hover {
+            color: var(--gold);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+
+        .lightbox-prev, .lightbox-next {
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-prev:hover, .lightbox-next:hover {
+            color: var(--gold);
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .lightbox-info {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .lightbox-title {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .lightbox-category {
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+            gap: 10px;
+        }
+
+        .pagination-btn {
+            background-color: var(--white);
+            border: 1px solid var(--black-light);
+            color: var(--black-light);
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 5px;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .pagination-btn.active, .pagination-btn:hover {
+            background-color: var(--gold);
+            border-color: var(--gold);
+            color: var(--black);
+        }
+
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination-btn.disabled:hover {
+            background-color: var(--white);
+            border-color: var(--black-light);
+            color: var(--black-light);
+        }
+
+        .pagination-info {
+            margin: 0 15px;
+            color: var(--black-light);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p, .footer-column a {
+            color: var(--white);
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--black);
+                flex-direction: column;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0;
+                text-align: center;
+                padding: 10px 0;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .creations-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .pagination {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-crown"></i>
+                Priaura Luxe Couture
+            </a>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="lescreations.html" class="active">Créations</a></li>
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Toutes Nos Créations</h1>
+            <p>Découvrez l'ensemble de notre collection exclusive, où chaque pièce raconte une histoire d'élégance et de savoir-faire.</p>
+        </div>
+    </section>
+
+    <!-- Section Créations -->
+    <section class="all-creations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Notre Collection</h2>
+            </div>
+
+            <!-- Filtres -->
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Toutes</button>
+                <button class="filter-btn" data-filter="robes">Robes</button>
+                <button class="filter-btn" data-filter="costumes">Costumes</button>
+                <button class="filter-btn" data-filter="accessoires">Accessoires</button>
+                <button class="filter-btn" data-filter="mariage">Mariage</button>
+                <button class="filter-btn" data-filter="soiree">Soirée</button>
+            </div>
+
+            <!-- Grille de créations -->
+            <div class="creations-grid" id="creations-container">
+                <!-- Les créations seront chargées dynamiquement ici -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination-container">
+                <!-- La pagination sera générée dynamiquement ici -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close">&times;</span>
+            <div class="lightbox-nav">
+                <div class="lightbox-prev"><i class="fas fa-chevron-left"></i></div>
+                <div class="lightbox-next"><i class="fas fa-chevron-right"></i></div>
+            </div>
+            <img src="" alt="" class="lightbox-img">
+            <div class="lightbox-info">
+                <h3 class="lightbox-title"></h3>
+                <div class="lightbox-category"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Priaura Luxe Couture</h3>
+                    <p>Votre atelier de couture de luxe, créant des pièces uniques et sur mesure depuis 2010.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Liens rapides</h3>
+                    <a href="index.html">Accueil</a>
+                    <a href="lescreations.html">Créations</a>
+                    <a href="#">À propos</a>
+                    <a href="#">Services</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Avenue de la Mode, Paris</p>
+                    <p><i class="fas fa-phone"></i> +33 1 23 45 67 89</p>
+                    <p><i class="fas fa-envelope"></i> contact@priaura-luxe.com</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Horaires</h3>
+                    <p>Lun - Ven: 9h - 18h</p>
+                    <p>Samedi: 10h - 17h</p>
+                    <p>Dimanche: Fermé</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Priaura Luxe Couture. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Données des créations
+        const creations = [
+            {
+                id: 1,
+                title: "Robe de Soirée Dorée",
+                category: "robes",
+                description: "Une robe élégante avec des broderies dorées, parfaite pour les occasions spéciales.",
+                image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 2,
+                title: "Costume Élégant",
+                category: "costumes",
+                description: "Costume sur mesure en laine noire avec finitions dorées.",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 3,
+                title: "Robe de Mariée Princesse",
+                category: "mariage",
+                description: "Robe de mariée en satin avec broderies délicates et perles.",
+                image: "https://images.unsplash.com/photo-1519657337289-0776531c5b7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 4,
+                title: "Sac à Main Doré",
+                category: "accessoires",
+                description: "Sac à main en cuir avec fermoir doré et détails élégants.",
+                image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 5,
+                title: "Robe Cocktail Noire",
+                category: "robes",
+                description: "Robe courte noire avec détails dorés, parfaite pour les soirées.",
+                image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 6,
+                title: "Costume Trois Pièces",
+                category: "costumes",
+                description: "Costume élégant trois pièces avec gilet et cravate assortie.",
+                image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 7,
+                title: "Robe de Mariée Moderne",
+                category: "mariage",
+                description: "Robe de mariée contemporaine avec dos nu et longue traîne.",
+                image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 8,
+                title: "Robe de Soirée Rouge",
+                category: "soiree",
+                description: "Robe longue rouge avec fente latérale et dos ouvert.",
+                image: "https://images.unsplash.com/photo-1566479179816-d53e6dbb441f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 9,
+                title: "Chaussures de Soirée",
+                category: "accessoires",
+                description: "Escarpins en satin noir avec détails dorés et talon aiguille.",
+                image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 10,
+                title: "Costume de Cérémonie",
+                category: "costumes",
+                description: "Costume élégant pour occasions formelles avec nœud papillon.",
+                image: "https://images.unsplash.com/photo-1626895870481-0d8c0d7625f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 11,
+                title: "Robe de Gala",
+                category: "robes",
+                description: "Robe longue avec broderies complexes et perles scintillantes.",
+                image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 12,
+                title: "Robe de Cocktail",
+                category: "soiree",
+                description: "Robe courte avec motifs géométriques et coupe asymétrique.",
+                image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 13,
+                title: "Robe de Bal",
+                category: "soiree",
+                description: "Robe longue en tulle avec applications de cristaux.",
+                image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 14,
+                title: "Costume Affaires",
+                category: "costumes",
+                description: "Costume professionnel en laine mérinos, élégant et confortable.",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 15,
+                title: "Robe de Mariée Classique",
+                category: "mariage",
+                description: "Robe de mariée traditionnelle avec col Claudine et manches longues.",
+                image: "https://images.unsplash.com/photo-1519657337289-0776531c5b7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 16,
+                title: "Ceinture de Soirée",
+                category: "accessoires",
+                description: "Ceinture en satin avec fermoir doré et pierres précieuses.",
+                image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 17,
+                title: "Robe de Plage",
+                category: "robes",
+                description: "Robe légère en lin, parfaite pour les vacances estivales.",
+                image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            },
+            {
+                id: 18,
+                title: "Costume Dîner",
+                category: "costumes",
+                description: "Costume smoking pour occasions formelles du soir.",
+                image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+            }
+        ];
+
+        // Configuration de la pagination
+        const itemsPerPage = 6;
+        let currentPage = 1;
+        let currentFilter = 'all';
+        let filteredCreations = [...creations];
+
+        // Éléments DOM
+        const creationsContainer = document.getElementById('creations-container');
+        const paginationContainer = document.getElementById('pagination-container');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        // Menu mobile
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('nav ul');
+
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            displayCreations();
+            setupPagination();
+            setupFilters();
+            setupLightbox();
+        });
+
+        // Affichage des créations
+        function displayCreations() {
+            creationsContainer.innerHTML = '';
+            
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const currentCreations = filteredCreations.slice(startIndex, endIndex);
+            
+            if (currentCreations.length === 0) {
+                creationsContainer.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; font-size: 1.2rem; color: var(--black-light);">Aucune création trouvée pour cette catégorie.</p>';
+                return;
+            }
+            
+            currentCreations.forEach(creation => {
+                const card = document.createElement('div');
+                card.className = 'creation-card';
+                card.setAttribute('data-category', creation.category);
+                card.innerHTML = `
+                    <img src="${creation.image}" alt="${creation.title}" class="creation-img">
+                    <div class="creation-info">
+                        <div class="creation-category">${getCategoryName(creation.category)}</div>
+                        <h3 class="creation-title">${creation.title}</h3>
+                        <p class="creation-description">${creation.description}</p>
+                        <button class="view-btn" data-id="${creation.id}">Voir plus <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                `;
+                creationsContainer.appendChild(card);
+            });
+            
+            // Animation des cartes
+            const cards = document.querySelectorAll('.creation-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        }
+
+        // Configuration de la pagination
+        function setupPagination() {
+            const totalPages = Math.ceil(filteredCreations.length / itemsPerPage);
+            
+            if (totalPages <= 1) {
+                paginationContainer.innerHTML = '';
+                return;
+            }
+            
+            let paginationHTML = '';
+            
+            // Bouton Précédent
+            paginationHTML += `
+                <button class="pagination-btn ${currentPage === 1 ? 'disabled' : ''}" id="prev-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            `;
+            
+            // Pages numérotées
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                    paginationHTML += `
+                        <button class="pagination-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">
+                            ${i}
+                        </button>
+                    `;
+                } else if (i === currentPage - 2 || i === currentPage + 2) {
+                    paginationHTML += `<span class="pagination-info">...</span>`;
+                }
+            }
+            
+            // Bouton Suivant
+            paginationHTML += `
+                <button class="pagination-btn ${currentPage === totalPages ? 'disabled' : ''}" id="next-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            `;
+            
+            // Info de pagination
+            paginationHTML += `
+                <span class="pagination-info">
+                    Page ${currentPage} sur ${totalPages} - ${filteredCreations.length} créations
+                </span>
+            `;
+            
+            paginationContainer.innerHTML = paginationHTML;
+            
+            // Événements de pagination
+            document.querySelectorAll('.pagination-btn[data-page]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentPage = parseInt(btn.getAttribute('data-page'));
+                    displayCreations();
+                    setupPagination();
+                    window.scrollTo({ top: creationsContainer.offsetTop - 100, behavior: 'smooth' });
+                });
+            });
+            
+            document.getElementById('prev-btn')?.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayCreations();
+                    setupPagination();
+                    window.scrollTo({ top: creationsContainer.offsetTop - 100, behavior: 'smooth' });
+                }
+            });
+            
+            document.getElementById('next-btn')?.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    displayCreations();
+                    setupPagination();
+                    window.scrollTo({ top: creationsContainer.offsetTop - 100, behavior: 'smooth' });
+                }
+            });
+        }
+
+        // Configuration des filtres
+        function setupFilters() {
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Retirer la classe active de tous les boutons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Ajouter la classe active au bouton cliqué
+                    button.classList.add('active');
+                    
+                    currentFilter = button.getAttribute('data-filter');
+                    currentPage = 1;
+                    
+                    // Filtrer les créations
+                    if (currentFilter === 'all') {
+                        filteredCreations = [...creations];
+                    } else {
+                        filteredCreations = creations.filter(creation => creation.category === currentFilter);
+                    }
+                    
+                    displayCreations();
+                    setupPagination();
+                });
+            });
+        }
+
+        // Configuration de la lightbox
+        function setupLightbox() {
+            const lightbox = document.querySelector('.lightbox');
+            const lightboxImg = document.querySelector('.lightbox-img');
+            const lightboxTitle = document.querySelector('.lightbox-title');
+            const lightboxCategory = document.querySelector('.lightbox-category');
+            const lightboxClose = document.querySelector('.lightbox-close');
+            const lightboxPrev = document.querySelector('.lightbox-prev');
+            const lightboxNext = document.querySelector('.lightbox-next');
+            
+            let currentImageIndex = 0;
+            
+            // Événement pour les boutons "Voir plus"
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.view-btn')) {
+                    const btn = e.target.closest('.view-btn');
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    const creation = creations.find(c => c.id === id);
+                    
+                    if (creation) {
+                        currentImageIndex = creations.indexOf(creation);
+                        updateLightbox();
+                        lightbox.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }
+                }
+            });
+            
+            lightboxClose.addEventListener('click', () => {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            lightboxPrev.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex - 1 + creations.length) % creations.length;
+                updateLightbox();
+            });
+            
+            lightboxNext.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex + 1) % creations.length;
+                updateLightbox();
+            });
+            
+            function updateLightbox() {
+                const creation = creations[currentImageIndex];
+                lightboxImg.src = creation.image;
+                lightboxTitle.textContent = creation.title;
+                lightboxCategory.textContent = getCategoryName(creation.category);
+            }
+            
+            // Fermer la lightbox en cliquant à l'extérieur
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Helper pour obtenir le nom de catégorie
+        function getCategoryName(category) {
+            const categories = {
+                'robes': 'Robes',
+                'costumes': 'Costumes',
+                'accessoires': 'Accessoires',
+                'mariage': 'Mariage',
+                'soiree': 'Soirée'
+            };
+            return categories[category] || category;
+        }
+    </script>
+</body>
+</html>
