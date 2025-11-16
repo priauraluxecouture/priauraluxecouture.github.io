@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Priaura Luxe Couture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables de couleurs */
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F4E4A6;
+            --gold-dark: #B8860B;
+            --black: #000000;
+            --black-light: #333333;
+            --white: #FFFFFF;
+            --gray: #F5F5F5;
+        }
+
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--black-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header et Navigation */
+        header {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--gold);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            padding: 150px 0 80px;
+            text-align: center;
+            color: var(--white);
+            margin-top: 60px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Section Services */
+        .services {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--black);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--gold);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 4px solid var(--gold);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+
+        .service-description {
+            color: var(--black-light);
+            margin-bottom: 20px;
+        }
+
+        .service-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .service-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .service-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .service-btn {
+            background-color: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .service-btn:hover {
+            background-color: var(--gold-dark);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Process Section */
+        .process {
+            padding: 80px 0;
+            background-color: var(--gray);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 0 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .process-step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -10px;
+            width: 50%;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background-color: var(--gold);
+            color: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--black);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1566206091558-7f218b696731?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2064&q=80') no-repeat center center/cover;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-btn {
+            background-color: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column p, .footer-column a {
+            color: var(--white);
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--black);
+                flex-direction: column;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0;
+                text-align: center;
+                padding: 10px 0;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .process-step:not(:last-child):after {
+                display: none;
+            }
+
+            .process-steps {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-crown"></i>
+                Priaura Luxe Couture
+            </a>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="lescreations.html">Créations</a></li>
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Nos Services</h1>
+            <p>Découvrez notre gamme complète de services de couture sur mesure, alliant tradition et innovation pour répondre à toutes vos attentes.</p>
+        </div>
+    </section>
+
+    <!-- Section Services -->
+    <section class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nos Prestations</h2>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <h3 class="service-title">Couture sur Mesure</h3>
+                    <p class="service-description">Des créations uniques conçues spécialement pour vous, selon vos mesures et vos préférences.</p>
+                    <ul class="service-features">
+                        <li>Prise de mesures personnalisée</li>
+                        <li>Choix des tissus et matières</li>
+                        <li>Essayages et ajustements</li>
+                        <li>Finitions impeccables</li>
+                    </ul>
+                    <a href="contact.html" class="service-btn">Demander un devis</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3 class="service-title">Retouches et Transformations</h3>
+                    <p class="service-description">Redonnez vie à vos vêtements préférés ou adaptez-les à votre morphologie actuelle.</p>
+                    <ul class="service-features">
+                        <li>Ajustement de longueur et de taille</li>
+                        <li>Réparation de tissus endommagés</li>
+                        <li>Modernisation de vêtements anciens</li>
+                        <li>Personnalisation de pièces existantes</li>
+                    </ul>
+                    <a href="contact.html" class="service-btn">Consulter nos tarifs</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-ring"></i>
+                    </div>
+                    <h3 class="service-title">Robe de Mariée</h3>
+                    <p class="service-description">Créez la robe de vos rêves pour votre jour le plus spécial avec notre expertise.</p>
+                    <ul class="service-features">
+                        <li>Consultation personnalisée</li>
+                        <li>Création de modèles uniques</li>
+                        <li>Broderies et embellissements</li>
+                        <li>Essayages réguliers</li>
+                    </ul>
+                    <a href="contact.html" class="service-btn">Prendre rendez-vous</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="service-title">Costumes sur Mesure</h3>
+                    <p class="service-description">Costumes élégants et parfaitement ajustés pour toutes les occasions formelles.</p>
+                    <ul class="service-features">
+                        <li>Costumes d'affaires</li>
+                        <li>Tenues de cérémonie</li>
+                        <li>Smokings et tenues de soirée</li>
+                        <li>Accessoires coordonnés</li>
+                    </ul>
+                    <a href="contact.html" class="service-btn">En savoir plus</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="service-title">Tenues de Soirée</h3>
+                    <p class="service-description">Des créations élégantes et sophistiquées pour briller lors de vos événements.</p>
+                    <ul class="service-features">
+                        <li>Robes de gala</li>
+                        <li>Tenues cocktail</li>
+                        <li>Accessoires assortis</li>
+                        <li>Conseils stylisme</li>
+                    </ul>
+                    <a href="contact.html" class="service-btn">Voir nos créations</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="service-title">Conseil en Style</h3>
+                    <p class="service-description">Notre expertise pour vous aider à définir et affirmer votre style personnel.</p>
+                    <ul class="service-features">
+                        <li>Analyse de silhouette</li>
+                        <li>Conseils couleurs et matières</li>
+                        <li>Création de dressing</li>
+                        <li>Accompagnement shopping</li>
+                    </ul>
+                    <a href="contact.html" class="service-btn">Réserver une consultation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>Notre Processus</h2>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Consultation</h3>
+                    <p>Nous discutons de vos besoins, préférences et budget pour définir votre projet.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Conception</h3>
+                    <p>Création des croquis et sélection des tissus et matériaux appropriés.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Prise de Mesures</h3>
+                    <p>Mesures précises pour garantir un ajustement parfait de votre création.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Confection</h3>
+                    <p>Réalisation de votre pièce avec un savoir-faire artisanal et une attention aux détails.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Essayages</h3>
+                    <p>Plusieurs essayages pour ajuster parfaitement la pièce à votre morphologie.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <h3 class="step-title">Livraison</h3>
+                    <p>Remise de votre création parfaitement finie et prête à être portée.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Prêt à créer votre pièce unique ?</h2>
+            <p>Contactez-nous dès aujourd'hui pour discuter de votre projet et obtenir un devis personnalisé.</p>
+            <a href="contact.html" class="cta-btn">Prendre rendez-vous</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Priaura Luxe Couture</h3>
+                    <p>Votre atelier de couture de luxe, créant des pièces uniques et sur mesure depuis 2010.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Liens rapides</h3>
+                    <a href="index.html">Accueil</a>
+                    <a href="lescreations.html">Créations</a>
+                    <a href="#">À propos</a>
+                    <a href="services.html">Services</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Avenue de la Mode, Paris</p>
+                    <p><i class="fas fa-phone"></i> +33 1 23 45 67 89</p>
+                    <p><i class="fas fa-envelope"></i> contact@priaura-luxe.com</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Horaires</h3>
+                    <p>Lun - Ven: 9h - 18h</p>
+                    <p>Samedi: 10h - 17h</p>
+                    <p>Dimanche: Fermé</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Priaura Luxe Couture. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('nav ul');
+
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Animation des cartes de service
+        document.addEventListener('DOMContentLoaded', () => {
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.style.animation = 'fadeInUp 0.8s ease-out forwards';
+            });
+        });
+    </script>
+</body>
+</html>
